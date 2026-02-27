@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: varanex-ai-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GROQ_API_KEY
+        scope: build,runtime
+        value: ${GROQ_API_KEY}
+      - key: NODE_ENV
+        scope: build,runtime
+        value: production
+      - key: PORT
+        scope: build,runtime
+        value: 5000

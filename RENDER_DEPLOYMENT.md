@@ -72,6 +72,8 @@ Response should be:
 }
 ```
 
+> **Note:** visiting the root URL (`https://your-service-name.onrender.com`) also returns a simple JSON message; the API endpoints live under `/health` and `/ask`. If you see "Endpoint not found" on the root, try adding `/health` to the path.
+
 ### Send Test Message
 ```bash
 curl -X POST https://your-service-name.onrender.com/ask \

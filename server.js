@@ -25,6 +25,14 @@ const client = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1"
 });
 
+// Root endpoint (friendly message)
+app.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "VaraNex AI backend is live. Use /health or /ask endpoints."
+  });
+});
+
 // Health check endpoint
 app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "Backend is running" });

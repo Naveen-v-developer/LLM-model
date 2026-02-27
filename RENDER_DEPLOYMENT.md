@@ -42,6 +42,7 @@ In Render Dashboard:
    - `GROQ_API_KEY`: Your Groq API key from https://console.groq.com
    - `NODE_ENV`: `production`
    - `FRONTEND_URL`: Your Vercel frontend URL (e.g., `https://your-project.vercel.app`)
+     *This value is used by the CORS policy. If omitted or incorrect, requests from your live frontend will fail with a CORS error (no Access-Control-Allow-Origin header). Set it exactly to your Vercel URL or use `*` for testing.*
 
 ### 4. Deploy
 

@@ -10,11 +10,23 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    process.env.FRONTEND_URL || "*"
-  ],
+  origin: (origin, callback) => {
+    const envUrl = process.env.FRONTEND_URL;
+    // handle missing origin (curl/postman)
+    if (!origin) return callback(null, true);
+
+    if (envUrl) {
+      if (envUrl === "*" || origin === envUrl) {
+        return callback(null, true);
+      }
+      console.warn(`⚠️ CORS blocked request from ${origin}; expected ${envUrl}`);
+      return callback(new Error("Not allowed by CORS"));
+    }
+
+    // no FRONTEND_URL set: allow all but warn
+    console.warn("⚠️ FRONTEND_URL not configured, CORS allowing all origins (not recommended)");
+    callback(null, true);
+  },
   credentials: true
 }));
 app.use(express.json());
